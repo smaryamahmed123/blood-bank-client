@@ -122,7 +122,7 @@ function DonorRegistrationForm() {
                             fullWidth
                             margin="normal"
                         />
-                        <FormControl fullWidth margin="normal">
+                        {/* <FormControl fullWidth margin="normal">
                             <FormLabel htmlFor="donerImg">Upload Image</FormLabel>
                             <input
                                 type="file"
@@ -131,7 +131,7 @@ function DonorRegistrationForm() {
                                 accept="image/*"
                                 required
                             />
-                        </FormControl>
+                        </FormControl> */}
                         <TextField
                             fullWidth
                             multiline
