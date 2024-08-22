@@ -21,19 +21,13 @@ function DonorRegistrationForm() {
     const [success, setSuccess] = useState(false);
 
     const handleChange = (event) => {
-        const { name, type, value, files } = event.target;
-        if (type === 'file') {
-            setFormData({
-                ...formData,
-                [name]: files[0] // Save the file object instead of its value
-            });
-        } else {
-            setFormData({
-                ...formData,
-                [name]: value
-            });
-        }
+        const { name, value } = event.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
     };
+    
 
     const handleCloseSnackbar = () => {
         setError(null);
