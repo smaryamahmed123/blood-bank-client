@@ -15,7 +15,6 @@ function DonorRegistrationForm() {
         bloodGroup: '',
         contactInfo: '',
         messages: '',
-        image: ''
     });
 
     const [error, setError] = useState(null);
