@@ -54,9 +54,6 @@ function DonorRegistrationForm() {
     
             // Call the backend API to add the donor
             await axios.post(`${BASE_URL3}/doner`, formDataObj, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
             });
             // Display success toast
             Toast('Donor registration successful!', 'success');
