@@ -48,7 +48,7 @@ function DonorRegistrationForm() {
             formDataObj.append('bloodGroup', formData.bloodGroup);
             formDataObj.append('contactInfo', formData.contactInfo);
             formDataObj.append('messages', formData.messages);
-            formDataObj.append('image', formData.image); // Assuming image is a File object
+            // formDataObj.append('image', formData.image); // Assuming image is a File object
 
             // Call the backend API to add the donor
             await axios.post(`${BASE_URL3}/doner`, formDataObj, {
@@ -64,7 +64,7 @@ function DonorRegistrationForm() {
                 bloodGroup: '',
                 contactInfo: '',
                 messages: '',
-                image: null
+                // image: null
             });
         } catch (error) {
             // Display error toast and log the detailed error response
