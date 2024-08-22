@@ -53,7 +53,7 @@ function DonorRegistrationForm() {
             // formDataObj.append('image', formData.image); // Remove this line
     
             // Call the backend API to add the donor
-            await axios.post(`${BASE_URL3}/api/forms/doner`, formDataObj, {
+            await axios.post(`${BASE_URL3}/doner`, formDataObj, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
