@@ -48,10 +48,12 @@ function DonorRegistrationForm() {
             formDataObj.append('bloodGroup', formData.bloodGroup);
             formDataObj.append('contactInfo', formData.contactInfo);
             formDataObj.append('messages', formData.messages);
-            // formDataObj.append('image', formData.image); // Assuming image is a File object
-
+    
+            // Ensure no file field is included
+            // formDataObj.append('image', formData.image); // Remove this line
+    
             // Call the backend API to add the donor
-            await axios.post(`${BASE_URL3}/doner`, formDataObj, {
+            await axios.post(`${BASE_URL3}/api/forms/doner`, formDataObj, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -63,8 +65,8 @@ function DonorRegistrationForm() {
                 name: '',
                 bloodGroup: '',
                 contactInfo: '',
-                messages: '',
-                // image: null
+                messages: ''
+                // image: null // Remove this line
             });
         } catch (error) {
             // Display error toast and log the detailed error response
@@ -72,7 +74,7 @@ function DonorRegistrationForm() {
             Toast('Error registering donor. Please try again.', 'error');
         }
     };
-
+    
     return (
         <>
             <Navbar />
