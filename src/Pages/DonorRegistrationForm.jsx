@@ -96,31 +96,6 @@ function DonorRegistrationForm() {
 
     
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            // Directly send formData object as JSON
-            await axios.post(`${BASE_URL3}/doner`, formData, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-    
-            // Display success toast
-            Toast('Donor registration successful!', 'success');
-            // Clear form data
-            setFormData({
-                name: '',
-                bloodGroup: '',
-                contactInfo: '',
-                messages: ''
-            });
-        } catch (error) {
-            // Display error toast and log the detailed error response
-            console.error('Error registering donor:', error.response ? error.response.data : error.message);
-            Toast('Error registering donor. Please try again.', 'error');
-        }
-    };
     
 
     return (
