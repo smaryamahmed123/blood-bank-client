@@ -33,21 +33,51 @@ function DonorRegistrationForm() {
         setError(null);
     };
 
+    // const handleSubmit = async (event) => {
+    //     event.preventDefault();
+    //     try {
+    //         const formDataObj = new FormData();
+    //         formDataObj.append('name', formData.name);
+    //         formDataObj.append('bloodGroup', formData.bloodGroup);
+    //         formDataObj.append('contactInfo', formData.contactInfo);
+    //         formDataObj.append('messages', formData.messages);
+    
+    //         // Ensure no file field is included
+    //         // formDataObj.append('image', formData.image); // Remove this line
+    
+    //         // Call the backend API to add the donor
+    //         await axios.post(`${BASE_URL3}/doner`, formDataObj, {
+    //         });
+    //         // Display success toast
+    //         Toast('Donor registration successful!', 'success');
+    //         // Clear form data
+    //         setFormData({
+    //             name: '',
+    //             bloodGroup: '',
+    //             contactInfo: '',
+    //             messages: ''
+    //             // image: null // Remove this line
+    //         });
+    //     } catch (error) {
+    //         // Display error toast and log the detailed error response
+    //         console.error('Error registering donor:', error.response ? error.response.data : error.message);
+    //         Toast('Error registering donor. Please try again.', 'error');
+    //     }
+    // };
+    
+
+
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const formDataObj = new FormData();
-            formDataObj.append('name', formData.name);
-            formDataObj.append('bloodGroup', formData.bloodGroup);
-            formDataObj.append('contactInfo', formData.contactInfo);
-            formDataObj.append('messages', formData.messages);
-    
-            // Ensure no file field is included
-            // formDataObj.append('image', formData.image); // Remove this line
-    
-            // Call the backend API to add the donor
-            await axios.post(`${BASE_URL3}/doner`, formDataObj, {
+            // Directly send formData object as JSON
+            await axios.post(`${BASE_URL3}/doner`, formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
+    
             // Display success toast
             Toast('Donor registration successful!', 'success');
             // Clear form data
@@ -56,7 +86,34 @@ function DonorRegistrationForm() {
                 bloodGroup: '',
                 contactInfo: '',
                 messages: ''
-                // image: null // Remove this line
+            });
+        } catch (error) {
+            // Display error toast and log the detailed error response
+            console.error('Error registering donor:', error.response ? error.response.data : error.message);
+            Toast('Error registering donor. Please try again.', 'error');
+        }
+    };
+
+    
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            // Directly send formData object as JSON
+            await axios.post(`${BASE_URL3}/doner`, formData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            // Display success toast
+            Toast('Donor registration successful!', 'success');
+            // Clear form data
+            setFormData({
+                name: '',
+                bloodGroup: '',
+                contactInfo: '',
+                messages: ''
             });
         } catch (error) {
             // Display error toast and log the detailed error response
@@ -65,6 +122,7 @@ function DonorRegistrationForm() {
         }
     };
     
+
     return (
         <>
             <Navbar />
