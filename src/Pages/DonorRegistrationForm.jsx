@@ -1,5 +1,3 @@
-// DonorRegistrationForm.jsx
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button, Box, CssBaseline, Container, MenuItem, Select, Typography, Snackbar, FormControl, FormLabel } from '@mui/material';
@@ -15,58 +13,23 @@ function DonorRegistrationForm() {
         bloodGroup: '',
         contactInfo: '',
         messages: '',
+        image: null
     });
 
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
 
     const handleChange = (event) => {
-        const { name, value } = event.target;
+        const { name, value, files } = event.target;
         setFormData({
             ...formData,
-            [name]: value
+            [name]: files ? files[0] : value
         });
     };
-    
 
     const handleCloseSnackbar = () => {
         setError(null);
     };
-
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault();
-    //     try {
-    //         const formDataObj = new FormData();
-    //         formDataObj.append('name', formData.name);
-    //         formDataObj.append('bloodGroup', formData.bloodGroup);
-    //         formDataObj.append('contactInfo', formData.contactInfo);
-    //         formDataObj.append('messages', formData.messages);
-    
-    //         // Ensure no file field is included
-    //         // formDataObj.append('image', formData.image); // Remove this line
-    
-    //         // Call the backend API to add the donor
-    //         await axios.post(`${BASE_URL3}/doner`, formDataObj, {
-    //         });
-    //         // Display success toast
-    //         Toast('Donor registration successful!', 'success');
-    //         // Clear form data
-    //         setFormData({
-    //             name: '',
-    //             bloodGroup: '',
-    //             contactInfo: '',
-    //             messages: ''
-    //             // image: null // Remove this line
-    //         });
-    //     } catch (error) {
-    //         // Display error toast and log the detailed error response
-    //         console.error('Error registering donor:', error.response ? error.response.data : error.message);
-    //         Toast('Error registering donor. Please try again.', 'error');
-    //     }
-    // };
-    
-
-
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -76,35 +39,29 @@ function DonorRegistrationForm() {
             formDataObj.append('bloodGroup', formData.bloodGroup);
             formDataObj.append('contactInfo', formData.contactInfo);
             formDataObj.append('messages', formData.messages);
-    
-            // Check if formData contains expected values
-            for (let pair of formDataObj.entries()) {
-                console.log(`${pair[0]}: ${pair[1]}`);
+            if (formData.image) {
+                formDataObj.append('image', formData.image);
             }
-    
+
             await axios.post(`${BASE_URL3}/doner`, formDataObj, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-    
+
             Toast('Donor registration successful!', 'success');
             setFormData({
                 name: '',
                 bloodGroup: '',
                 contactInfo: '',
-                messages: ''
+                messages: '',
+                image: null
             });
         } catch (error) {
             console.error('Error registering donor:', error.response ? error.response.data : error.message);
             Toast('Error registering donor. Please try again.', 'error');
         }
     };
-    
-
-    
-
-    
 
     return (
         <>
@@ -155,7 +112,7 @@ function DonorRegistrationForm() {
                             fullWidth
                             margin="normal"
                         />
-                        {/* <FormControl fullWidth margin="normal">
+                        <FormControl fullWidth margin="normal">
                             <FormLabel htmlFor="donerImg">Upload Image</FormLabel>
                             <input
                                 type="file"
@@ -164,7 +121,7 @@ function DonorRegistrationForm() {
                                 accept="image/*"
                                 required
                             />
-                        </FormControl> */}
+                        </FormControl>
                         <TextField
                             fullWidth
                             multiline
